@@ -170,7 +170,7 @@ function(core) {
         if ( this.showOverlay ) {
             this.overlay = this.builder.buildDomModel(document.body, overlay);
         }
-        contentClass = 'lbx-window ' + (core.helperAds.isOn() ? 'has-ads' : 'no-ads') + ' ' + (this.className || '');
+        contentClass = 'lbx-window has-ads ' + (this.className || '');
         content = {tag: 'div', className: contentClass, styles: {visibility: 'hidden'},
             childs: [
                 this.showCloseButton ? {tag: 'a', id: 'exit', events: [{click: this.close.bind(this)}]} : {},

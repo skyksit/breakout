@@ -37,14 +37,14 @@ function(WindowBase, core, gameOptions, i18) {
      * @method model
      */
     Games.prototype.model = function() {
-        var adsTarget = 'games' + (core.helperAds.getScreenClass() == 'big' ? '_728x90' : ''),
+        var adsTarget = 'adsense.html',
             onPlayClick = $.proxy(this.onPlayClick, this),
             adsContainer;
 
         if ( core.helperApp.platform() == 'chrome' ) {
-            adsContainer = {tag: 'webview', src: API_ADDR + 'ads-chrome.html/' + adsTarget};
+            adsContainer = {tag: 'webview', src: API_ADDR + 'ads/' + adsTarget};
         } else {
-            adsContainer = {tag: 'iframe', src: API_ADDR + 'ads-web.html/' + adsTarget,
+            adsContainer = {tag: 'iframe', src: API_ADDR + 'ads/' + adsTarget,
                 scrolling: 'no', frameborder: '0', vspace: '0', marginheight: '0', marginwidth: '0',
                 hspace: '0', allowtransparency: 'true'};
         }
@@ -54,10 +54,10 @@ function(WindowBase, core, gameOptions, i18) {
                 {tag: 'div', className: 'games-window', childs: []},
                 {tag: 'div', className: 'option-item show-on-start checkbox', childs: []},
                 {tag: 'div', className: 'ads ads-' + core.helperAds.getScreenClass(), childs: [
-                    core.helperAds.isOn() ? {tag: 'div', className: 'ads-label', html: 'advertisement'} : {},
-                    core.helperAds.isOn() ? adsContainer : {}
+                    {tag: 'div', className: 'ads-label', html: 'advertisement'},
+                    adsContainer
                 ]},
-                {tag: 'div', className: 'game-button-cont', styles: core.helperAds.isOn() ? {} : {marginTop: 24, paddingBottom: 44}, 
+                {tag: 'div', className: 'game-button-cont', styles: {}, 
                     childs: [{tag: 'div', className: 'medium primary btn icon-right icon-arrow-right ' + 
                                     (this.options.game == 'pegasus' ? 'warning' : ''), childs: [
                         {tag: 'a', href: '#', html: i18._('games-start-game'), events: [{click: onPlayClick}]}
